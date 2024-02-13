@@ -1,4 +1,5 @@
 package com.laudoStratus.demo.models;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -6,25 +7,24 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
 @Entity
-@Table(name = "equipamento")
-public class Equipamento implements Serializable {
+@Table(name = "tecnico")
+
+public class Tecnico implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nome")
-    private String nomeEquipamento;
+    private String nomeTecnico;
 
-    @Column(name = "descricao")
-    private String descricao;
+    @Column(name = "cargo")
+    private String cargoTecnico;
 
-    @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
 }
