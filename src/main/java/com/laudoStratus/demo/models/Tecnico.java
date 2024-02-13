@@ -19,7 +19,7 @@ public class Tecnico implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long tecnicoId;
 
     @Column(name = "nome")
     private String nomeTecnico;

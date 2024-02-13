@@ -1,6 +1,5 @@
 package com.laudoStratus.demo.controller;
 
-import com.laudoStratus.demo.models.Empresa;
 import com.laudoStratus.demo.models.Tecnico;
 import com.laudoStratus.demo.service.TecnicoService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +18,8 @@ public class TecnicoController {
     private final TecnicoService tecnicoService;
 
     @PostMapping(value = "/cadastrar",produces = "application/json")
-    public ResponseEntity<Tecnico> CadastrarTecnico (@RequestBody Tecnico tecnico) {
-        Tecnico tecnicoSalvo = tecnicoService.Cadastrar(tecnico);
-        return ResponseEntity.status(HttpStatus.CREATED).body(tecnicoSalvo);
+    public ResponseEntity<Tecnico> cadastrarTecnico(@RequestBody Tecnico tecnico) {
+        Tecnico novoTecnico = tecnicoService.Cadastrar(tecnico);
+        return new ResponseEntity<>(novoTecnico, HttpStatus.CREATED);
     }
 }
