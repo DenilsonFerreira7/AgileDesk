@@ -18,7 +18,7 @@ public class LaudoTecnicoController {
 
     private final LaudoTecnicoService laudoTecnicoService;
 
-    @PostMapping("/criar")
+    @PostMapping (value = "/criar",produces = "application/json")
     public ResponseEntity<LaudoTecnico> criarLaudoTecnico(@RequestBody LaudoTecnicoRequest laudoRequest) {
         LaudoTecnico novoLaudo = laudoTecnicoService.criarLaudo(laudoRequest);
         return new ResponseEntity<>(novoLaudo, HttpStatus.CREATED);
