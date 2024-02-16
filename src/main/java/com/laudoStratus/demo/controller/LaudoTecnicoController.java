@@ -28,4 +28,10 @@ public class LaudoTecnicoController {
         LaudoTecnicoResponse laudoTecnicoResponse = laudoTecnicoService.obterLaudoTecnico(id);
         return new ResponseEntity<>(laudoTecnicoResponse, HttpStatus.OK);
     }
+
+    @GetMapping("/nomeEmpresa/{nomeEmpresa}")
+    public ResponseEntity<List<LaudoTecnico>> obterLaudosPorNomeEmpresa(@PathVariable String nomeEmpresa) {
+        List<LaudoTecnico> laudos = laudoTecnicoService.obterLaudosPorNomeEmpresa(nomeEmpresa);
+        return new ResponseEntity<>(laudos, HttpStatus.OK);
+    }
 }

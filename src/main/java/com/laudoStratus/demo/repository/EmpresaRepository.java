@@ -15,4 +15,3 @@ public interface EmpresaRepository extends JpaRepository <Empresa,Long> {
     @Query("SELECT e FROM Equipamento e WHERE e.empresa.id IN :idsEquipamentos")
     List<Equipamento> findEquipamentosByIds(List<Long> idsEquipamentos);
 }
-

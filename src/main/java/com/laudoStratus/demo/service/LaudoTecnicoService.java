@@ -80,4 +80,9 @@ public class LaudoTecnicoService {
             throw new RuntimeException("Laudo técnico não encontrado");
         }
     }
+
+    public List<LaudoTecnico> obterLaudosPorNomeEmpresa(String nomeEmpresa) {
+        return laudoTecnicoRepository.findByEmpresaNomeEmpresaIgnoreCase(nomeEmpresa);
+    }
+
 }
