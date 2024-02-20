@@ -23,6 +23,8 @@ public class LaudoTecnicoController {
         LaudoTecnico novoLaudo = laudoTecnicoService.criarLaudo(laudoRequest);
         return new ResponseEntity<>(novoLaudo, HttpStatus.CREATED);
     }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<LaudoTecnicoResponse> obterLaudoTecnico(@PathVariable Long id) {
         LaudoTecnicoResponse laudoTecnicoResponse = laudoTecnicoService.obterLaudoTecnico(id);

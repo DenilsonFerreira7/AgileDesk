@@ -1,6 +1,5 @@
 package com.laudoStratus.demo.controller;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
 import com.laudoStratus.demo.models.LaudoTecnico;
 import com.laudoStratus.demo.service.LaudoTecnicoService;
 import com.laudoStratus.demo.service.PDFService;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RequiredArgsConstructor
 @RestController
