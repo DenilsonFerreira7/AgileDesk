@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/empresas/{empresaId}/equipamentos")
+@RequestMapping("/empresa/{empresaId}/equipamento")
 public class EquipamentoController {
 
     private final EquipamentoService equipamentoService;

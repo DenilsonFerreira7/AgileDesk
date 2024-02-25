@@ -8,8 +8,8 @@ import java.util.List;
 @Setter
 public class LaudoTecnicoRequest {
 
-    private String nomeEmpresa;
-    private List<Long> idsEquipamentos;
-    private String nomeTecnico;
+    private Long empresaId;
+    private List<Long> equipamentoIds;
+    private Long tecnicoId;
     private String descricao;
 }

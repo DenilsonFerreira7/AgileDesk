@@ -30,19 +30,19 @@ public class LaudoTecnicoService {
     private final EquipamentoRepository equipamentoRepository;
 
     public LaudoTecnico criarLaudo(LaudoTecnicoRequest laudoRequest) {
-        Optional<Empresa> empresaOptional = Optional.ofNullable(empresaRepository.findByNomeEmpresa(laudoRequest.getNomeEmpresa()));
+        Optional<Empresa> empresaOptional = empresaRepository.findById(laudoRequest.getEmpresaId());
         if (empresaOptional.isEmpty()) {
-            throw new IllegalArgumentException("Empresa não encontrada: " + laudoRequest.getNomeEmpresa());
+            throw new IllegalArgumentException("Empresa não encontrada com o ID: " + laudoRequest.getEmpresaId());
         }
         Empresa empresa = empresaOptional.get();
 
-        Optional<Tecnico> tecnicoOptional = Optional.ofNullable(tecnicoRepository.findByNomeTecnico(laudoRequest.getNomeTecnico()));
+        Optional<Tecnico> tecnicoOptional = tecnicoRepository.findById(laudoRequest.getTecnicoId());
         if (tecnicoOptional.isEmpty()) {
-            throw new IllegalArgumentException("Técnico não encontrado: " + laudoRequest.getNomeTecnico());
+            throw new IllegalArgumentException("Técnico não encontrado com o ID: " + laudoRequest.getTecnicoId());
         }
         Tecnico tecnico = tecnicoOptional.get();
 
-        List<Equipamento> equipamentos = equipamentoRepository.findAllById(laudoRequest.getIdsEquipamentos());
+        List<Equipamento> equipamentos = equipamentoRepository.findAllById(laudoRequest.getEquipamentoIds());
 
         LaudoTecnico laudoTecnico = new LaudoTecnico();
         laudoTecnico.setEmpresa(empresa);
