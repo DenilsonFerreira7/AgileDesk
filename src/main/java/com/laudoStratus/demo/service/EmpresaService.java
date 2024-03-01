@@ -24,6 +24,10 @@ public class EmpresaService {
         return empresaOptional.orElse(null);
     }
 
+    public List <Empresa> findAll (){
+        return empresaRepository.findAll();
+    }
+
     public Empresa findByNome(String nome) {
         return empresaRepository.findByNomeEmpresa(nome);
     }

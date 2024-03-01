@@ -5,10 +5,9 @@ import com.laudoStratus.demo.service.EmpresaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,5 +20,10 @@ public class EmpresaController {
     public ResponseEntity<Empresa> createEmpresa(@RequestBody Empresa empresa) {
         Empresa savedEmpresa = empresaService.Cadastrar(empresa);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmpresa);
+    }
+    @GetMapping (value = "/todas")
+    public ResponseEntity<List<Empresa>> findAll() {
+        List<Empresa> empresas = empresaService.findAll();
+        return new ResponseEntity<>(empresas, HttpStatus.OK);
     }
 }
