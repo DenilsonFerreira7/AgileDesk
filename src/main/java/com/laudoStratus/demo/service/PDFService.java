@@ -13,6 +13,7 @@ import com.laudoStratus.demo.models.Equipamento;
 import com.laudoStratus.demo.models.LaudoTecnico;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -98,4 +99,10 @@ public class PDFService {
 
         return outputStream.toByteArray();
     }
+
+    public String generatePDFBase64(LaudoTecnico laudoTecnico) {
+        // Retorna diretamente o array de bytes
+        return new String(generatePDF(laudoTecnico));
+    }
+
 }
