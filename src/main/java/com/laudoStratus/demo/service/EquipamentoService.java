@@ -32,4 +32,7 @@ public class EquipamentoService {
         equipamento.setEmpresa(empresa);
         return equipamentoRepository.save(equipamento);
     }
+    public Long findTotalByTipoEquipamento(TipoEquipamento tipoEquipamento) {
+        return equipamentoRepository.countByTipoEquipamento(tipoEquipamento);
+    }
 }

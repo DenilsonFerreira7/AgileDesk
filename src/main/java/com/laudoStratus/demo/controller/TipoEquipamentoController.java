@@ -1,8 +1,5 @@
 package com.laudoStratus.demo.controller;
 
-import com.laudoStratus.demo.models.Empresa;
-import com.laudoStratus.demo.models.Equipamento;
-import com.laudoStratus.demo.models.Tecnico;
 import com.laudoStratus.demo.models.TipoEquipamento;
 import com.laudoStratus.demo.service.TipoEquipamentoService;
 import lombok.RequiredArgsConstructor;

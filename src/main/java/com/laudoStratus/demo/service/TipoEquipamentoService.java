@@ -15,7 +15,7 @@ public class TipoEquipamentoService {
 
     private final TipoEquipamentoRepository tipoEquipamentoRepository;
 
-    public TipoEquipamento CadastrarTipoEquipamento (TipoEquipamento tipoEquipamento){
+    public TipoEquipamento CadastrarTipoEquipamento(TipoEquipamento tipoEquipamento) {
         return tipoEquipamentoRepository.save(tipoEquipamento);
     }
 
@@ -24,7 +24,7 @@ public class TipoEquipamentoService {
                 .orElseThrow(() -> new RuntimeException("Tipo de equipamento não encontrado"));
     }
 
-    public List <TipoEquipamento> TipoEquipamentoTodos (){
+    public List<TipoEquipamento> TipoEquipamentoTodos() {
         return tipoEquipamentoRepository.findAll();
     }
 
