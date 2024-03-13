@@ -27,4 +27,10 @@ public class Tecnico implements Serializable {
     @Column(name = "cargo")
     private String cargoTecnico;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column (name = "telefone")
+    private String telefone;
+
 }

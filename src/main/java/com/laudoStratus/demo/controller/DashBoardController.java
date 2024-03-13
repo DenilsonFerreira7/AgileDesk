@@ -1,6 +1,7 @@
 package com.laudoStratus.demo.controller;
 
 import com.laudoStratus.demo.DTO.ContagemEquipamentoPorTipo;
+import com.laudoStratus.demo.DTO.EquipamentoSetorDTO;
 import com.laudoStratus.demo.models.TipoEquipamento;
 import com.laudoStratus.demo.repository.EquipamentoRepository;
 import com.laudoStratus.demo.repository.TipoEquipamentoRepository;
@@ -22,9 +23,9 @@ import java.util.Map;
 public class DashBoardController {
 
 
-//    private final DashBoardService dashBoardService;
     private final TipoEquipamentoRepository tipoEquipamentoRepository;
     private final EquipamentoRepository equipamentoRepository;
+    private final EquipamentoService equipamentoService;
 
     @GetMapping("/quantidade-por-tipo")
     public Map<String, Long> getQuantidadePorTipoEquipamento() {
@@ -37,5 +38,10 @@ public class DashBoardController {
         }
 
         return quantidadePorTipo;
+    }
+
+    @GetMapping("/contagem-por-setor")
+    public List<EquipamentoSetorDTO> contarEquipamentosPorSetor() {
+        return equipamentoService.contarEquipamentosPorSetor();
     }
 }

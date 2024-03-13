@@ -1,4 +1,5 @@
 package com.laudoStratus.demo.DTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TecnicoResponse {
-    private Long tecnicoId;
-    private String nomeTecnico;
-    private String cargoTecnico;
-
+public class EquipamentoSetorDTO {
+    private String nomeSetor;
+    private Long quantidadeEquipamentos;
 }
