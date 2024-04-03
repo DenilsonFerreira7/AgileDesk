@@ -5,6 +5,7 @@ import com.laudoStratus.demo.repository.TecnicoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -16,6 +17,10 @@ public class TecnicoService {
     public Tecnico Cadastrar (Tecnico tecnico){
         return tecnicoRepository.save(tecnico);
     }
+    public List<Tecnico> getAllTecnicos() {
+        return tecnicoRepository.findAll();
+    }
+
     public Tecnico obterTecnicoPorId(Long id) {
         Optional<Tecnico> tecnicoOptional = tecnicoRepository.findById(id);
         return tecnicoOptional.orElse(null);

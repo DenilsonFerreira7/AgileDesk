@@ -41,5 +41,5 @@ public class Equipamento implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tipoEquipamento_id")
-    private TipoEquipamento tipoEquipamento; // Corrigido para TipoEquipamento
+    private TipoEquipamento tipoEquipamento;
 }

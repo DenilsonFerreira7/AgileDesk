@@ -17,6 +17,7 @@ public class EquipamentoController {
     private final EquipamentoService equipamentoService;
     private final EmpresaService empresaService;
 
+
     @PostMapping("/cadastrar")
     public Equipamento cadastrarEquipamento(
             @PathVariable Long empresaId,
