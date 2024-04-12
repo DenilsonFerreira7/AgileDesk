@@ -39,6 +39,14 @@
 			<version>5.7.0</version>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
+=======
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext7-core</artifactId>
+			<version>7.1.16</version>
+		</dependency>
+>>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
