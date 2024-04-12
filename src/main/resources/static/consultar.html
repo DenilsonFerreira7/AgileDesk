@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Equipamentos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#consultarBtn").click(function () {
+                var empresaId = $("#empresaId").val();
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/empresas/" + empresaId + "/equipamentos/consultar",
+                    success: function (response) {
+                        $("#resultados").empty();
+                        if (response.length > 0) {
+                            var empresaNome = response[0].empresa.nomeEmpresa;
+                            $("#resultados").append("<h2>Equipamentos da empresa " + empresaNome + "</h2>");
+                            $.each(response, function (index, equipamento) {
+                                $("#resultados").append("<li>" + equipamento.nomeEquipamento + ": " + equipamento.descricao + "</li>");
+                            });
+                        } else {
+                            $("#resultados").append("<li>Nenhum equipamento encontrado para a empresa com ID " + empresaId + ".</li>");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        $("#resultados").empty();
+                        $("#resultados").append("<li>Erro ao consultar equipamentos.</li>");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Consulta de Equipamentos</h1>
+<label for="empresaId">ID da Empresa:</label>
+<input type="text" id="empresaId">
+<button id="consultarBtn">Consultar Equipamentos</button>
+<ul id="resultados"></ul>
+</body>
+</html>

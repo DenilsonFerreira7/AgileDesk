@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta e Cadastro de Empresas e Equipamentos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<h2>Cadastrar Empresa</h2>
+<form id="formCadastrarEmpresa">
+    <label for="nomeEmpresa">Nome da Empresa:</label>
+    <input type="text" id="nomeEmpresa" name="nomeEmpresa" required><br><br>
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" name="endereco" required><br><br>
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" name="telefone" required><br><br>
+    <button type="submit">Cadastrar Empresa</button>
+</form>
+
+<h2>Cadastrar Equipamento</h2>
+<form id="formCadastrarEquipamento">
+    <label for="nomeEquipamento">Nome do Equipamento:</label>
+    <input type="text" id="nomeEquipamento" name="nomeEquipamento" required><br><br>
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" name="descricao" required><br><br>
+    <label for="empresaId">ID da Empresa:</label>
+    <input type="number" id="empresaId" name="empresaId" required><br><br>
+    <button type="submit">Cadastrar Equipamento</button>
+</form>
+
+<script>
+    $(document).ready(function(){
+        // Cadastrar Empresa
+        $('#formCadastrarEmpresa').submit(function(event){
+            event.preventDefault();
+            var nomeEmpresa = $('#nomeEmpresa').val();
+            var endereco = $('#endereco').val();
+            var telefone = $('#telefone').val();
+            $.ajax({
+                type: 'POST',
+                url: '/empresa/cadastrar',
+                contentType: 'application/json',
+                data: JSON.stringify({nomeEmpresa: nomeEmpresa, endereco: endereco, telefone: telefone}),
+                success: function(data){
+                    alert('Empresa cadastrada com sucesso!');
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('Erro ao cadastrar empresa:', errorThrown);
+                }
+            });
+        });
+
+        // Cadastrar Equipamento
+        $('#formCadastrarEquipamento').submit(function(event){
+            event.preventDefault();
+            var nomeEquipamento = $('#nomeEquipamento').val();
+            var descricao = $('#descricao').val();
+            var empresaId = $('#empresaId').val();
+            $.ajax({
+                type: 'POST',
+                url: '/empresas/' + empresaId + '/equipamentos/cadastrar',
+                contentType: 'application/json',
+                data: JSON.stringify({nomeEquipamento: nomeEquipamento, descricao: descricao}),
+                success: function(data){
+                    alert('Equipamento cadastrado com sucesso!');
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('Erro ao cadastrar equipamento:', errorThrown);
+                }
+            });
+        });
+
+        // Consultar Empresa e Equipamentos
+        $('#formConsultarEmpresa').submit(function(event){
+            event.preventDefault();
+            var empresaId = $('#empresaIdConsulta').val();
+            $.ajax({
+                type: 'GET',
+                url: '/empresas/' + empresaId + '/equipamentos/consultar',
+                success: function(data){
+                    $('#resultadoConsulta').html('');
+                    if (data && data.equipamentos) {
+                        var empresaHtml = '<h3>Detalhes da Empresa</h3>';
+                        empresaHtml += '<p>ID: ' + data.id + '</p>';
+                        empresaHtml += '<p>Nome: ' + data.nomeEmpresa + '</p>';
+                        empresaHtml += '<p>Endereço: ' + data.endereco + '</p>';
+                        empresaHtml += '<p>Telefone: ' + data.telefone + '</p>';
+                        empresaHtml += '<h3>Equipamentos</h3>';
+                        if (data.equipamentos.length > 0) {
+                            empresaHtml += '<ul>';
+                            data.equipamentos.forEach(function(equipamento) {
+                                empresaHtml += '<li>' + equipamento.nomeEquipamento + ' - ' + equipamento.descricao + '</li>';
+                            });
+                            empresaHtml += '</ul>';
+                        } else {
+                            empresaHtml += '<p>Nenhum equipamento associado a esta empresa.</p>';
+                        }
+                        $('#resultadoConsulta').html(empresaHtml);
+                    } else {
+                        $('#resultadoConsulta').html('Resposta da consulta está em um formato inesperado.');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log('Erro ao consultar empresa:', errorThrown);
+                    $('#resultadoConsulta').html('Erro ao consultar empresa.');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
