@@ -20,19 +20,14 @@ public class Equipamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
     private String nomeEquipamento;
 
-    @Column(name = "setor")
     private String setor;
 
-    @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "acessoRemoto")
     private String acessoRemoto;
 
-    @Column(name = "senhaRemoto")
     private String senhaRemoto;
 
     @ManyToOne

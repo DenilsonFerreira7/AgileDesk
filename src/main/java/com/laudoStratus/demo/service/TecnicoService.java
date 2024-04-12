@@ -1,5 +1,7 @@
 package com.laudoStratus.demo.service;
 
+import com.laudoStratus.demo.DTO.TecnicoResponse;
+import com.laudoStratus.demo.mapper.TecnicoMapper;
 import com.laudoStratus.demo.models.Tecnico;
 import com.laudoStratus.demo.repository.TecnicoRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -17,8 +20,12 @@ public class TecnicoService {
     public Tecnico Cadastrar (Tecnico tecnico){
         return tecnicoRepository.save(tecnico);
     }
-    public List<Tecnico> getAllTecnicos() {
-        return tecnicoRepository.findAll();
+
+    public List<TecnicoResponse> getAllTecnicos() {
+        List<Tecnico> tecnicos = tecnicoRepository.findAll();
+        return tecnicos.stream()
+                .map(TecnicoMapper::mapTecnicoToTecnicoResponse)
+                .collect(Collectors.toList());
     }
 
     public Tecnico obterTecnicoPorId(Long id) {

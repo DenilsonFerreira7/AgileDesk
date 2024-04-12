@@ -20,17 +20,13 @@ import java.util.List;
 public class Empresa implements Serializable {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long empresaId;
 
-    @Column(name = "nome")
     private String nomeEmpresa;
 
-    @Column(name = "endereco")
     private String endereco;
 
-    @Column(name = "telefone")
     private String telefone;
 
     @JsonIgnore

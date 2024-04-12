@@ -1,5 +1,6 @@
 package com.laudoStratus.demo.controller;
 
+import com.laudoStratus.demo.DTO.TecnicoResponse;
 import com.laudoStratus.demo.models.Tecnico;
 import com.laudoStratus.demo.service.TecnicoService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class TecnicoController {
         return new ResponseEntity<>(novoTecnico, HttpStatus.CREATED);
     }
     @GetMapping("/todos")
-    public ResponseEntity<List<Tecnico>> getAllTecnicos() {
-        List<Tecnico> tecnicos = tecnicoService.getAllTecnicos();
+    public ResponseEntity<List<TecnicoResponse>> getAllTecnicos() {
+        List<TecnicoResponse> tecnicos = tecnicoService.getAllTecnicos();
         return new ResponseEntity<>(tecnicos, HttpStatus.OK);
     }
 

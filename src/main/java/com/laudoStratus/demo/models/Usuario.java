@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,21 +14,19 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @Entity
-@Table(name = "tecnico")
-public class Tecnico implements Serializable {
+@Table(name = "usuario")
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tecnicoId;
+    private Long idUser;
 
-    private String nomeTecnico;
+    private String Nome;
 
-    private String cargoTecnico;
+    private String Email;
 
-    private String email;
+    private String Senha;
 
-    private String telefone;
-
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(mappedBy = "usuario")
     private List<Chamado> chamados = new ArrayList<>();
 }
