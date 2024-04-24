@@ -27,7 +27,7 @@ public class DashBoardController {
     private final EquipamentoRepository equipamentoRepository;
     private final EquipamentoService equipamentoService;
 
-    @GetMapping("/quantidade-por-tipo")
+    @GetMapping("/quantidadePorTipo")
     public Map<String, Long> getQuantidadePorTipoEquipamento() {
         List<TipoEquipamento> tiposEquipamento = tipoEquipamentoRepository.findAll();
         Map<String, Long> quantidadePorTipo = new HashMap<>();
@@ -40,8 +40,9 @@ public class DashBoardController {
         return quantidadePorTipo;
     }
 
-    @GetMapping("/contagem-por-setor")
+    @GetMapping("/contagemPorSetor")
     public List<EquipamentoSetorDTO> contarEquipamentosPorSetor() {
         return equipamentoService.contarEquipamentosPorSetor();
     }
+
 }

@@ -12,4 +12,6 @@ public class LaudoTecnicoRequest {
     private List<Long> equipamentoIds;
     private Long tecnicoId;
     private String descricao;
+    private List<EquipamentoSetorDTO> equipamentosPorSetor; // Adição do novo campo
+
 }

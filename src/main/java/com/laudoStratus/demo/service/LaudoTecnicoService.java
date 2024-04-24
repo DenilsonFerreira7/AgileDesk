@@ -3,6 +3,7 @@ package com.laudoStratus.demo.service;
 import com.laudoStratus.demo.DTO.*;
 import com.laudoStratus.demo.mapper.EmpresaMapper;
 import com.laudoStratus.demo.mapper.EquipamentoMapper;
+import com.laudoStratus.demo.mapper.LaudoTecnicoPDFMapper;
 import com.laudoStratus.demo.mapper.TecnicoMapper;
 import com.laudoStratus.demo.models.Empresa;
 import com.laudoStratus.demo.models.Equipamento;
@@ -83,6 +84,13 @@ public class LaudoTecnicoService {
 
     public List<LaudoTecnico> obterLaudosPorNomeEmpresa(String nomeEmpresa) {
         return laudoTecnicoRepository.findByEmpresaNomeEmpresaIgnoreCase(nomeEmpresa);
+    }
+
+    public List<LaudoTecnicoPDFDTO> getAllLaudoTecnicoPDFDTO() {
+        List<LaudoTecnico> laudos = laudoTecnicoRepository.findAll();
+        return laudos.stream()
+                .map(LaudoTecnicoPDFMapper::mapLaudoTecnicoToLaudoTecnicoPDFDTO)
+                .collect(Collectors.toList());
     }
 
 }

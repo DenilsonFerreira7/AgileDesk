@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class PDFController {
 
 
     @PostMapping("/laudoTecnico")
-    public ResponseEntity<byte[]> cadastrarLaudoTecnicoEObterPDF(@RequestBody LaudoTecnicoRequest laudoRequest) {
+    public ResponseEntity<byte[]> cadastrarLaudoTecnicoEObterPDF(@RequestBody LaudoTecnicoRequest laudoRequest) throws IOException {
         // Crie o laudo técnico utilizando o serviço LaudoTecnicoService
         LaudoTecnico laudoTecnico = laudoTecnicoService.criarLaudo(laudoRequest);
 
@@ -75,6 +76,23 @@ public class PDFController {
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(pdfBytes);
+    }
+
+    @GetMapping(value = "/laudo/{id}", produces = "application/pdf")
+    public ResponseEntity<byte[]> gerarPdfPorId(@PathVariable Long id) throws IOException {
+        LaudoTecnico laudoTecnico = laudoTecnicoService.buscarLaudoPorId(id);
+
+        if (laudoTecnico == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        byte[] pdfBytes = pdfService.generatePDF(laudoTecnico);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentLength(pdfBytes.length);
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 
     private String criarLinkPDF(LaudoTecnico laudoTecnico) {

@@ -1,5 +1,6 @@
 package com.laudoStratus.demo.controller;
 
+import com.laudoStratus.demo.DTO.LaudoTecnicoPDFDTO;
 import com.laudoStratus.demo.DTO.LaudoTecnicoRequest;
 import com.laudoStratus.demo.DTO.LaudoTecnicoResponse;
 import com.laudoStratus.demo.models.LaudoTecnico;
@@ -36,4 +37,11 @@ public class LaudoTecnicoController {
         List<LaudoTecnico> laudos = laudoTecnicoService.obterLaudosPorNomeEmpresa(nomeEmpresa);
         return new ResponseEntity<>(laudos, HttpStatus.OK);
     }
+
+    @GetMapping("/pdfall")
+    public ResponseEntity<List<LaudoTecnicoPDFDTO>> getAllLaudoTecnicoPDF() {
+        List<LaudoTecnicoPDFDTO> laudosPDF = laudoTecnicoService.getAllLaudoTecnicoPDFDTO();
+        return new ResponseEntity<>(laudosPDF, HttpStatus.OK);
+    }
+
 }

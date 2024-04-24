@@ -49,4 +49,5 @@ public class EquipamentoService {
                 .map(entry -> new EquipamentoSetorDTO(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
     }
+
 }

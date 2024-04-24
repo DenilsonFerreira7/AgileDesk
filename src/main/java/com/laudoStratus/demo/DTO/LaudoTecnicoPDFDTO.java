@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LaudoTecnicoPDFDTO {
+    private Long id;
     private String empresaNome;
     private String tecnicoNome;
     private String descricao;

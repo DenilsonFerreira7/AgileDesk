@@ -66,10 +66,9 @@ public class ChamadoService {
 
         chamado.setTitulo(chamadoAtualizado.getTitulo());
         chamado.setStatus(chamadoAtualizado.getStatus());
-        // Atualize outros campos conforme necessário
-
         return chamadoRepository.save(chamado);
     }
+
     public Chamado adicionarDescricao(Long idChamado, DescricaoAtualizacao novaDescricao) {
         // Obter o chamado a ser atualizado
         Chamado chamado = chamadoRepository.findById(idChamado)
