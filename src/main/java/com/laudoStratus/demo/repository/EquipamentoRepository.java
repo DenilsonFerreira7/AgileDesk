@@ -1,6 +1,12 @@
 package com.laudoStratus.demo.repository;
 
 import com.laudoStratus.demo.models.Equipamento;
+<<<<<<< HEAD
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EquipamentoRepository extends JpaRepository<Equipamento,Long> {
+}
+=======
 import com.laudoStratus.demo.models.TipoEquipamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,3 +23,4 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento,Long> {
     Long countByTipoEquipamento(TipoEquipamento tipoEquipamento);
 
 }
+>>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
