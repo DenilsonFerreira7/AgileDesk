@@ -1,14 +1,12 @@
 package com.laudoStratus.demo.controller;
 
-import com.laudoStratus.demo.DTO.LaudoTecnicoPDFDTO;
 import com.laudoStratus.demo.DTO.LaudoTecnicoRequest;
-import com.laudoStratus.demo.mapper.LaudoTecnicoPDFMapper;
 import com.laudoStratus.demo.models.LaudoPreventiva;
 import com.laudoStratus.demo.models.LaudoTecnico;
 import com.laudoStratus.demo.service.LaudoPreventivaService;
 import com.laudoStratus.demo.service.LaudoTecnicoService;
-import com.laudoStratus.demo.service.PDFService;
-import com.laudoStratus.demo.service.PDFServicePreventiva;
+import com.laudoStratus.demo.service.PDFLaudoTecnico;
+import com.laudoStratus.demo.service.PDFPreventiva;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -26,8 +22,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/pdf")
 public class PDFController {
 
-    private final PDFService pdfService;
-    private final PDFServicePreventiva pdfServicePreventiva;
+    private final PDFLaudoTecnico pdfLaudoTecnico;
+    private final PDFPreventiva pdfPreventiva;
     private final LaudoTecnicoService laudoTecnicoService;
     private final LaudoPreventivaService laudoPreventivaService;
 
@@ -38,7 +34,7 @@ public class PDFController {
         LaudoTecnico laudoTecnico = laudoTecnicoService.criarLaudo(laudoRequest);
 
         // Gere o PDF do laudo técnico utilizando o serviço PDFService
-        byte[] pdfBytes = pdfService.generatePDF(laudoTecnico);
+        byte[] pdfBytes = pdfLaudoTecnico.generatePDF(laudoTecnico);
 
         // Defina o nome do PDF com base nos dados do laudo técnico
         String nomeEmpresa = laudoTecnico.getEmpresa().getNomeEmpresa();
@@ -60,7 +56,7 @@ public class PDFController {
     @PostMapping("/laudoPreventiva")
     public ResponseEntity<byte[]> cadastrarLaudoPreventivaEObterPDF(@RequestBody LaudoTecnicoRequest laudoRequest) {
         LaudoPreventiva laudoPreventiva = laudoPreventivaService.criarLaudo(laudoRequest);
-        byte[] pdfBytes = pdfServicePreventiva.generatePDF(laudoPreventiva);
+        byte[] pdfBytes = pdfPreventiva.generatePDF(laudoPreventiva);
 
         String nomeEmpresa = laudoPreventiva.getEmpresa().getNomeEmpresa();
         Long laudoId = laudoPreventiva.getId();
@@ -84,7 +80,7 @@ public class PDFController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        byte[] pdfBytes = pdfService.generatePDF(laudoTecnico);
+        byte[] pdfBytes = pdfLaudoTecnico.generatePDF(laudoTecnico);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
@@ -101,7 +97,7 @@ public class PDFController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        byte[] pdfBytes = pdfServicePreventiva.generatePDF(laudoPreventiva);
+        byte[] pdfBytes = pdfPreventiva.generatePDF(laudoPreventiva);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);

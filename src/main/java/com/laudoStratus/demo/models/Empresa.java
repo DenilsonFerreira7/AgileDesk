@@ -16,20 +16,15 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 
-<<<<<<< HEAD
-@Table(name = "Empresa")
-=======
+
 @Table(name = "empresa")
->>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
+
 public class Empresa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-    private Long id;
-=======
     private Long empresaId;
->>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
+
 
     private String nomeEmpresa;
 

@@ -18,13 +18,13 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class PDFService {
+public class PDFLaudoTecnico {
 
     public byte[] generatePDF(LaudoTecnico laudoTecnico) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         // Caminho para o modelo PDF preenchível
-        String modeloPdfPath = "src/main/resources/static/modelo.pdf";
+        String modeloPdfPath = "static/modelo.pdf";
         float x = 395;
         float y = 200;
 

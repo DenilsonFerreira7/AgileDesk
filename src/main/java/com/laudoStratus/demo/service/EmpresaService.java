@@ -1,18 +1,15 @@
 package com.laudoStratus.demo.service;
 import com.laudoStratus.demo.models.Empresa;
-<<<<<<< HEAD
-=======
+
 import com.laudoStratus.demo.models.Equipamento;
->>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
+
 import com.laudoStratus.demo.repository.EmpresaRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
 import java.util.List;
->>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
+
 import java.util.Optional;
 
 
@@ -29,8 +26,7 @@ public class EmpresaService {
         Optional<Empresa> empresaOptional = empresaRepository.findById(id);
         return empresaOptional.orElse(null);
     }
-<<<<<<< HEAD
-=======
+
 
     public List <Empresa> findAll (){
         return empresaRepository.findAll();
@@ -43,6 +39,6 @@ public class EmpresaService {
     public List<Equipamento> findEquipamentosByIds(List<Long> idsEquipamentos) {
         return empresaRepository.findEquipamentosByIds(idsEquipamentos);
     }
->>>>>>> b6c0b60e0115e79fe73b3d62f3f8435add07bea7
+
 }
 

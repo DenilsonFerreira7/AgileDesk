@@ -2,7 +2,6 @@ package com.laudoStratus.demo.service;
 
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.colors.Color;
-import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.events.Event;
 import com.itextpdf.kernel.events.IEventHandler;
@@ -15,7 +14,6 @@ import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.layout.property.VerticalAlignment;
 import com.laudoStratus.demo.models.Empresa;
 import com.laudoStratus.demo.models.Equipamento;
 import com.laudoStratus.demo.models.LaudoPreventiva;
@@ -26,11 +24,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class PDFServicePreventiva {
+public class PDFPreventiva {
 
     @Autowired
     private LaudoPreventivaRepository laudoPreventivaRepository;
