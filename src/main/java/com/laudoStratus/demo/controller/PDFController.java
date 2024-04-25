@@ -32,8 +32,6 @@ public class PDFController {
     private final LaudoPreventivaService laudoPreventivaService;
 
 
-
-
     @PostMapping("/laudoTecnico")
     public ResponseEntity<byte[]> cadastrarLaudoTecnicoEObterPDF(@RequestBody LaudoTecnicoRequest laudoRequest) throws IOException {
         // Crie o laudo técnico utilizando o serviço LaudoTecnicoService
@@ -95,12 +93,21 @@ public class PDFController {
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 
-    private String criarLinkPDF(LaudoTecnico laudoTecnico) {
-        LaudoTecnicoPDFDTO pdfDTO = LaudoTecnicoPDFMapper.mapLaudoTecnicoToLaudoTecnicoPDFDTO(laudoTecnico);
+    @GetMapping(value = "/laudoPreventiva/{id}", produces = "application/pdf")
+    public ResponseEntity<byte[]> gerarPdfPorIdPreventiva(@PathVariable Long id) throws IOException {
+        LaudoPreventiva laudoPreventiva = laudoPreventivaService.buscarLaudoPorId(id);
 
-        return "/pdf/laudo/" + laudoTecnico.getId() + "?empresa=" + pdfDTO.getEmpresaNome();
+        if (laudoPreventiva == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        byte[] pdfBytes = pdfServicePreventiva.generatePDF(laudoPreventiva);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentLength(pdfBytes.length);
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
-
-
 
 }
