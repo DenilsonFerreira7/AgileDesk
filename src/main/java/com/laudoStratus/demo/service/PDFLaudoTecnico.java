@@ -41,11 +41,11 @@ public class PDFLaudoTecnico {
             document.add(new Paragraph("Laudo Técnico")
                     .setFont(font)
                     .setFontSize(20)
-                    .setFontColor(ColorConstants.BLACK) // Definindo a cor do texto como branco
+                    .setFontColor(ColorConstants.BLACK)
                     .setBold()
                     .setTextAlignment(TextAlignment.CENTER));
 
-            document.add(new Paragraph("\n\n\n"));
+            document.add(new Paragraph("\n"));
 
             // Adicionar informações sobre a empresa e o técnico
             document.add(new Paragraph("Empresa: " + laudoTecnico.getEmpresa().getNomeEmpresa())
@@ -79,11 +79,11 @@ public class PDFLaudoTecnico {
                 document.add(new Paragraph("Equipamento: " + equipamento.getNomeEquipamento() +
                         " - Configuração: " + equipamento.getDescricao())
                         .setFont(font)
-                        .setFontSize(fontSize)
+                        .setFontSize(10)
                         .setTextAlignment(TextAlignment.LEFT));
             }
 
-            document.add(new Paragraph("\n\n\n"));
+            document.add(new Paragraph("\n"));
 
             // Adicionar a descrição do atendimento
             document.add(new Paragraph("Descrição do Atendimento:")
@@ -93,10 +93,10 @@ public class PDFLaudoTecnico {
                     .setTextAlignment(TextAlignment.LEFT));
             document.add(new Paragraph(laudoTecnico.getDescricao())
                     .setFont(font)
-                    .setFontSize(fontSize)
+                    .setFontSize(11)
                     .setTextAlignment(TextAlignment.LEFT));
 
-            document.add(new Paragraph("\n\n\n"));
+            document.add(new Paragraph("\n\n"));
             document.close();
         }
 

@@ -113,6 +113,9 @@ public class PDFPreventiva {
 
                 document.add(specificationsTable);
                 document.add(new Paragraph("\n\n"));
+                document.add(new Paragraph("\n\n"));
+                document.add(new Paragraph("\n\n"));
+
 
                 // Descrição da preventiva
                 document.add(createInfoParagraph("\n\nDescrição da Preventiva:"));

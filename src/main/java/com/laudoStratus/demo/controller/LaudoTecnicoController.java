@@ -1,9 +1,10 @@
 package com.laudoStratus.demo.controller;
 
 import com.laudoStratus.demo.DTO.LaudoTecnicoPDFDTO;
-import com.laudoStratus.demo.DTO.LaudoTecnicoRequest;
+import com.laudoStratus.demo.DTO.LaudoPreventivaPDFDTO;
 import com.laudoStratus.demo.DTO.LaudoTecnicoResponse;
 import com.laudoStratus.demo.models.LaudoTecnico;
+import com.laudoStratus.demo.service.LaudoPreventivaService;
 import com.laudoStratus.demo.service.LaudoTecnicoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,10 @@ import java.util.List;
 public class LaudoTecnicoController {
 
     private final LaudoTecnicoService laudoTecnicoService;
+    private final LaudoPreventivaService laudoPreventivaService;
 
     @PostMapping (value = "/criar",produces = "application/json")
-    public ResponseEntity<LaudoTecnico> criarLaudoTecnico(@RequestBody LaudoTecnicoRequest laudoRequest) {
+    public ResponseEntity<LaudoTecnico> criarLaudoTecnico(@RequestBody LaudoPreventivaPDFDTO laudoRequest) {
         LaudoTecnico novoLaudo = laudoTecnicoService.criarLaudo(laudoRequest);
         return new ResponseEntity<>(novoLaudo, HttpStatus.CREATED);
     }
@@ -43,5 +45,11 @@ public class LaudoTecnicoController {
         List<LaudoTecnicoPDFDTO> laudosPDF = laudoTecnicoService.getAllLaudoTecnicoPDFDTO();
         return new ResponseEntity<>(laudosPDF, HttpStatus.OK);
     }
+    @GetMapping("/pdfPreventivaAll")
+    public ResponseEntity<List<LaudoPreventivaPDFDTO>> getAllLaudoPreventivaPDF() {
+        List<LaudoPreventivaPDFDTO> laudoPreventivaPDFDTOS = laudoPreventivaService.getAllLaudoTecnicoPDFDTO();
+        return new ResponseEntity<>(laudoPreventivaPDFDTOS, HttpStatus.OK);
+    }
+
 
 }

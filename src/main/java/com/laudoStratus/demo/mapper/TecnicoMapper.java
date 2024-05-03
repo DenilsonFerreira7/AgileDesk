@@ -9,7 +9,8 @@ public class TecnicoMapper {
         return new TecnicoResponse(
                 tecnico.getTecnicoId(),
                 tecnico.getNomeTecnico(),
-                tecnico.getCargoTecnico()
+                tecnico.getCargoTecnico(),
+                tecnico.getFotoPerfil()
         );
     }
 }

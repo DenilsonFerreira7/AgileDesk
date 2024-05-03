@@ -1,6 +1,6 @@
 package com.laudoStratus.demo.controller;
 
-import com.laudoStratus.demo.DTO.LaudoTecnicoRequest;
+import com.laudoStratus.demo.DTO.LaudoPreventivaPDFDTO;
 import com.laudoStratus.demo.models.LaudoPreventiva;
 import com.laudoStratus.demo.models.LaudoTecnico;
 import com.laudoStratus.demo.service.LaudoPreventivaService;
@@ -29,7 +29,7 @@ public class PDFController {
 
 
     @PostMapping("/laudoTecnico")
-    public ResponseEntity<byte[]> cadastrarLaudoTecnicoEObterPDF(@RequestBody LaudoTecnicoRequest laudoRequest) throws IOException {
+    public ResponseEntity<byte[]> cadastrarLaudoTecnicoEObterPDF(@RequestBody LaudoPreventivaPDFDTO laudoRequest) throws IOException {
         // Crie o laudo técnico utilizando o serviço LaudoTecnicoService
         LaudoTecnico laudoTecnico = laudoTecnicoService.criarLaudo(laudoRequest);
 
@@ -54,7 +54,7 @@ public class PDFController {
     }
 
     @PostMapping("/laudoPreventiva")
-    public ResponseEntity<byte[]> cadastrarLaudoPreventivaEObterPDF(@RequestBody LaudoTecnicoRequest laudoRequest) {
+    public ResponseEntity<byte[]> cadastrarLaudoPreventivaEObterPDF(@RequestBody LaudoPreventivaPDFDTO laudoRequest) {
         LaudoPreventiva laudoPreventiva = laudoPreventivaService.criarLaudo(laudoRequest);
         byte[] pdfBytes = pdfPreventiva.generatePDF(laudoPreventiva);
 

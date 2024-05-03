@@ -30,7 +30,7 @@ public class LaudoTecnicoService {
     private final TecnicoRepository tecnicoRepository;
     private final EquipamentoRepository equipamentoRepository;
 
-    public LaudoTecnico criarLaudo(LaudoTecnicoRequest laudoRequest) {
+    public LaudoTecnico criarLaudo(LaudoPreventivaPDFDTO laudoRequest) {
         Optional<Empresa> empresaOptional = empresaRepository.findById(laudoRequest.getEmpresaId());
         if (empresaOptional.isEmpty()) {
             throw new IllegalArgumentException("Empresa não encontrada com o ID: " + laudoRequest.getEmpresaId());

@@ -30,6 +30,8 @@ public class Tecnico implements Serializable {
 
     private String telefone;
 
+    private String fotoPerfil;
+
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 }
