@@ -4,9 +4,7 @@ import com.laudoStratus.demo.models.Chamado;
 import com.laudoStratus.demo.models.DescricaoAtualizacao;
 import com.laudoStratus.demo.repository.ChamadoRepository;
 import com.laudoStratus.demo.repository.DescricaoAtualizacaoRepository;
-import com.laudoStratus.demo.validacao.DescricaoAtualizacaoValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,7 +15,7 @@ import java.util.List;
 public class DescricaoAtualizacaoService {
 
     private final DescricaoAtualizacaoRepository descricaoAtualizacaoRepository;
-    private final DescricaoAtualizacaoValidator descricaoAtualizacaoValidator;
+    private final com.laudoStratus.demo.validacao.chamadosVal.descricaoAtualizacaoValidator descricaoAtualizacaoValidator;
 
     private final ChamadoRepository chamadoRepository;
 

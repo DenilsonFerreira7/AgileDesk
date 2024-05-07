@@ -4,7 +4,7 @@ import com.laudoStratus.demo.DTO.ChamadoDTO;
 import com.laudoStratus.demo.models.*;
 import com.laudoStratus.demo.repository.ChamadoRepository;
 import com.laudoStratus.demo.repository.DescricaoAtualizacaoRepository;
-import com.laudoStratus.demo.validacao.ChamadoCreationService;
+import com.laudoStratus.demo.validacao.chamadosVal.ChamadoCreationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

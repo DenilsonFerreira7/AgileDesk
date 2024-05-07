@@ -1,6 +1,7 @@
 package com.laudoStratus.demo.service;
 
 import com.laudoStratus.demo.DTO.*;
+import com.laudoStratus.demo.exceptions.MessageNotFoundException;
 import com.laudoStratus.demo.mapper.EmpresaMapper;
 import com.laudoStratus.demo.mapper.EquipamentoMapper;
 import com.laudoStratus.demo.mapper.LaudoTecnicoPDFMapper;
@@ -13,6 +14,7 @@ import com.laudoStratus.demo.repository.EmpresaRepository;
 import com.laudoStratus.demo.repository.EquipamentoRepository;
 import com.laudoStratus.demo.repository.LaudoTecnicoRepository;
 import com.laudoStratus.demo.repository.TecnicoRepository;
+import com.laudoStratus.demo.validacao.laudoVal.LaudoTecnicoValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,19 +31,18 @@ public class LaudoTecnicoService {
     private final EmpresaRepository empresaRepository;
     private final TecnicoRepository tecnicoRepository;
     private final EquipamentoRepository equipamentoRepository;
+    private final LaudoTecnicoValidation laudoTecnicoValidation;
 
     public LaudoTecnico criarLaudo(LaudoPreventivaPDFDTO laudoRequest) {
+        laudoTecnicoValidation.validateLaudoRequest(laudoRequest);
+
         Optional<Empresa> empresaOptional = empresaRepository.findById(laudoRequest.getEmpresaId());
-        if (empresaOptional.isEmpty()) {
-            throw new IllegalArgumentException("Empresa não encontrada com o ID: " + laudoRequest.getEmpresaId());
-        }
-        Empresa empresa = empresaOptional.get();
+        Empresa empresa = empresaOptional.orElseThrow(() ->
+                new IllegalArgumentException(MessageNotFoundException.EmpresaNaoEncontrada(laudoRequest.getEmpresaId())));
 
         Optional<Tecnico> tecnicoOptional = tecnicoRepository.findById(laudoRequest.getTecnicoId());
-        if (tecnicoOptional.isEmpty()) {
-            throw new IllegalArgumentException("Técnico não encontrado com o ID: " + laudoRequest.getTecnicoId());
-        }
-        Tecnico tecnico = tecnicoOptional.get();
+        Tecnico tecnico = tecnicoOptional.orElseThrow(() ->
+                new IllegalArgumentException(MessageNotFoundException.TecnicoNaoEncontrado(laudoRequest.getTecnicoId())));
 
         List<Equipamento> equipamentos = equipamentoRepository.findAllById(laudoRequest.getEquipamentoIds());
 
@@ -57,7 +58,7 @@ public class LaudoTecnicoService {
 
     public LaudoTecnico buscarLaudoPorId(Long id) {
         return laudoTecnicoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Laudo técnico não encontrado com o ID: " + id));
+                .orElseThrow(() -> new RuntimeException(MessageNotFoundException.LaudoIdNull(id)));
     }
 
     public LaudoTecnicoResponse obterLaudoTecnico(Long id) {
@@ -78,7 +79,7 @@ public class LaudoTecnicoService {
                     laudoTecnico.getDataCriacao()
             );
         } else {
-            throw new RuntimeException("Laudo técnico não encontrado");
+            throw new RuntimeException(MessageNotFoundException.LaudoIdNull(id));
         }
     }
 

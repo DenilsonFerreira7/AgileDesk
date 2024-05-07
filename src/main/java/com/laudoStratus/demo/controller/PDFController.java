@@ -76,10 +76,6 @@ public class PDFController {
     public ResponseEntity<byte[]> gerarPdfPorId(@PathVariable Long id) throws IOException {
         LaudoTecnico laudoTecnico = laudoTecnicoService.buscarLaudoPorId(id);
 
-        if (laudoTecnico == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
         byte[] pdfBytes = pdfLaudoTecnico.generatePDF(laudoTecnico);
 
         HttpHeaders headers = new HttpHeaders();
@@ -92,10 +88,6 @@ public class PDFController {
     @GetMapping(value = "/laudoPreventiva/{id}", produces = "application/pdf")
     public ResponseEntity<byte[]> gerarPdfPorIdPreventiva(@PathVariable Long id) throws IOException {
         LaudoPreventiva laudoPreventiva = laudoPreventivaService.buscarLaudoPorId(id);
-
-        if (laudoPreventiva == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
         byte[] pdfBytes = pdfPreventiva.generatePDF(laudoPreventiva);
 

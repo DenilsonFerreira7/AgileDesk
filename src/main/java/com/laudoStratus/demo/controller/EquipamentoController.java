@@ -23,8 +23,6 @@ public class EquipamentoController {
     private final EquipamentoService equipamentoService;
     private final EmpresaService empresaService;
 
-
-
         @PostMapping("/cadastrar")
         public Equipamento cadastrarEquipament2o (
                 @PathVariable Long empresaId,

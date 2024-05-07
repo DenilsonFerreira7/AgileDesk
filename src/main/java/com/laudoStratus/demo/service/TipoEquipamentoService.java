@@ -1,13 +1,11 @@
 package com.laudoStratus.demo.service;
 
-import com.laudoStratus.demo.models.Tecnico;
 import com.laudoStratus.demo.models.TipoEquipamento;
 import com.laudoStratus.demo.repository.TipoEquipamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service

@@ -1,4 +1,4 @@
-package com.laudoStratus.demo.validacao;
+package com.laudoStratus.demo.validacao.chamadosVal;
 
 import com.laudoStratus.demo.models.Chamado;
 import com.laudoStratus.demo.models.DescricaoAtualizacao;
