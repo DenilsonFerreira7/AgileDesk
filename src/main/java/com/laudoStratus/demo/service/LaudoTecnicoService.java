@@ -56,32 +56,33 @@ public class LaudoTecnicoService {
         return laudoTecnicoRepository.save(laudoTecnico);
     }
 
+
     public LaudoTecnico buscarLaudoPorId(Long id) {
         return laudoTecnicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(MessageNotFoundException.LaudoIdNull(id)));
     }
 
+
     public LaudoTecnicoResponse obterLaudoTecnico(Long id) {
-        Optional<LaudoTecnico> laudoTecnicoOptional = laudoTecnicoRepository.findById(id);
-        if (laudoTecnicoOptional.isPresent()) {
-            LaudoTecnico laudoTecnico = laudoTecnicoOptional.get();
-            EmpresaResponse empresaResponse = EmpresaMapper.mapEmpresaToEmpresaResponse(laudoTecnico.getEmpresa());
-            List<EquipamentoResponse> equipamentosResponse = laudoTecnico.getEquipamentos().stream()
-                    .map(EquipamentoMapper::mapEquipamentoToEquipamentoResponse)
-                    .collect(Collectors.toList());
-            TecnicoResponse tecnicoResponse = TecnicoMapper.mapTecnicoToTecnicoResponse(laudoTecnico.getTecnico());
-            return new LaudoTecnicoResponse(
-                    laudoTecnico.getId(),
-                    empresaResponse,
-                    equipamentosResponse,
-                    tecnicoResponse,
-                    laudoTecnico.getDescricao(),
-                    laudoTecnico.getDataCriacao()
-            );
-        } else {
-            throw new RuntimeException(MessageNotFoundException.LaudoIdNull(id));
-        }
+        laudoTecnicoValidation.validarIdNotNull(id);
+        LaudoTecnico laudoTecnico = laudoTecnicoValidation.validarLaudoExistente(id);
+
+        EmpresaResponse empresaResponse = EmpresaMapper.mapEmpresaToEmpresaResponse(laudoTecnico.getEmpresa());
+        List<EquipamentoResponse> equipamentosResponse = laudoTecnico.getEquipamentos().stream()
+                .map(EquipamentoMapper::mapEquipamentoToEquipamentoResponse)
+                .collect(Collectors.toList());
+        TecnicoResponse tecnicoResponse = TecnicoMapper.mapTecnicoToTecnicoResponse(laudoTecnico.getTecnico());
+
+        return new LaudoTecnicoResponse(
+                laudoTecnico.getId(),
+                empresaResponse,
+                equipamentosResponse,
+                tecnicoResponse,
+                laudoTecnico.getDescricao(),
+                laudoTecnico.getDataCriacao()
+        );
     }
+
 
     public List<LaudoTecnico> obterLaudosPorNomeEmpresa(String nomeEmpresa) {
         return laudoTecnicoRepository.findByEmpresaNomeEmpresaIgnoreCase(nomeEmpresa);

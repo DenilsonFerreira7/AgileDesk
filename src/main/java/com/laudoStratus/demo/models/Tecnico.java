@@ -34,4 +34,5 @@ public class Tecnico implements Serializable {
 
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
+
 }

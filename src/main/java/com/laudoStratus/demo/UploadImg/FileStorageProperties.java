@@ -1,15 +1,28 @@
 package com.laudoStratus.demo.UploadImg;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
+@ConfigurationProperties(prefix = "file")
 public class FileStorageProperties {
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
+    private String uploadDir = "src/main/resources/static/imgtec";
+    private long maxSize; // Tamanho máximo do arquivo em bytes
 
     public String getUploadDir() {
         return uploadDir;
+    }
+
+    public void setUploadDir(String uploadDir) {
+        this.uploadDir = uploadDir;
+    }
+
+    public long getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(long maxSize) {
+        this.maxSize = maxSize;
     }
 }

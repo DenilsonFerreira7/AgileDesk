@@ -1,5 +1,6 @@
 package com.laudoStratus.demo.service;
 
+import com.laudoStratus.demo.exceptions.MessageNotFoundException;
 import com.laudoStratus.demo.models.TipoEquipamento;
 import com.laudoStratus.demo.repository.TipoEquipamentoRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class TipoEquipamentoService {
 
     public TipoEquipamento findById(Long id) {
         return tipoEquipamentoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tipo de equipamento não encontrado"));
+                .orElseThrow(() -> MessageNotFoundException.EquipamentoNaoEncontrado(id));
     }
 
     public List<TipoEquipamento> TipoEquipamentoTodos() {

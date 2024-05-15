@@ -29,6 +29,7 @@ public class DescricaoAtualizacaoService {
     public List<DescricaoAtualizacao> listarTodasDescricoes() {
         return descricaoAtualizacaoRepository.findAll();
     }
+
     public  Chamado adicionarDescricao(Long idChamado, String novaDescricao, String atualizadoPor) {
         // Recupere o chamado a ser atualizado do banco de dados
         Chamado chamado = chamadoRepository.findById(idChamado)
@@ -38,7 +39,7 @@ public class DescricaoAtualizacaoService {
         DescricaoAtualizacao novaDescricaoAtualizacao = new DescricaoAtualizacao();
         novaDescricaoAtualizacao.setDescricao(novaDescricao);
         novaDescricaoAtualizacao.setAtualizadoPor(atualizadoPor);
-        novaDescricaoAtualizacao.setUpdateDateTime(new Date()); // Defina a data/hora atual
+        novaDescricaoAtualizacao.setUpdateDateTime(new Date());
 
         // Associe a nova descrição ao chamado
         novaDescricaoAtualizacao.setChamado(chamado);

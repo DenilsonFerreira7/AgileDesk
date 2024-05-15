@@ -11,6 +11,8 @@ public class TecnicoResponse {
     private Long tecnicoId;
     private String nomeTecnico;
     private String cargoTecnico;
+    private String email;
+    private String telefone;
     private String fotoPerfil;
 
 }

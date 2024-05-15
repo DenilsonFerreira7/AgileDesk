@@ -6,7 +6,6 @@ import com.laudoStratus.demo.repository.EmpresaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.Null;
 
 @Component
 @RequiredArgsConstructor

@@ -5,13 +5,13 @@ import com.laudoStratus.demo.UploadImg.FileStorageService;
 import com.laudoStratus.demo.mapper.TecnicoMapper;
 import com.laudoStratus.demo.models.Tecnico;
 import com.laudoStratus.demo.repository.TecnicoRepository;
+import com.laudoStratus.demo.validacao.tecnicoVal.TecnicoValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -20,25 +20,24 @@ public class TecnicoService {
 
     private final TecnicoRepository tecnicoRepository;
     private final FileStorageService fileStorageService;
+    private final TecnicoValidation tecnicoValidation;
 
-    public Tecnico cadastrarTecnico(String nomeTecnico, String cargoTecnico, String email, String telefone, MultipartFile fotoPerfil) throws IOException {
+    public Tecnico cadastrarTecnico
+            (String nomeTecnico, String cargoTecnico, String email, String telefone, MultipartFile fotoPerfil) throws IOException {
+        String fotoPerfilPath = fileStorageService.storeFile(fotoPerfil); // Salva a imagem e obtém o caminho completo
+        tecnicoValidation.validateFotoPerfilPath(fotoPerfilPath);
+        return saveTecnico(nomeTecnico, cargoTecnico, email, telefone, fotoPerfilPath);
+    }
+
+    private Tecnico saveTecnico(String nomeTecnico, String cargoTecnico, String email, String telefone, String fotoPerfilPath) {
         Tecnico novoTecnico = new Tecnico();
         novoTecnico.setNomeTecnico(nomeTecnico);
         novoTecnico.setCargoTecnico(cargoTecnico);
         novoTecnico.setEmail(email);
         novoTecnico.setTelefone(telefone);
-        // Salvar a foto do perfil em algum lugar e definir o caminho no objeto Tecnico
-        String fotoPerfilPath = salvarFotoPerfil(fotoPerfil);
         novoTecnico.setFotoPerfil(fotoPerfilPath);
         return tecnicoRepository.save(novoTecnico);
     }
-
-    private String salvarFotoPerfil(MultipartFile fotoPerfil) throws IOException {
-        // Use o serviço FileStorageService para salvar a foto
-        String fotoPerfilPath = fileStorageService.storeFile(fotoPerfil);
-        return fotoPerfilPath;
-    }
-
 
     public List<TecnicoResponse> getAllTecnicos() {
         List<Tecnico> tecnicos = tecnicoRepository.findAll();
@@ -48,22 +47,19 @@ public class TecnicoService {
     }
 
     public void updateFotoPerfil(Long tecnicoId, String fotoPerfil) {
-        Optional<Tecnico> optionalTecnico = tecnicoRepository.findById(tecnicoId);
-        if (optionalTecnico.isPresent()) {
-            Tecnico tecnico = optionalTecnico.get();
-            tecnico.setFotoPerfil(fotoPerfil);
-            tecnicoRepository.save(tecnico);
-        } else {
-            // Lidar com o cenário onde o técnico com o ID fornecido não foi encontrado
-        }
+        tecnicoValidation.updateFotoPerfil(tecnicoId, fotoPerfil, tecnicoRepository);
     }
 
     public Tecnico obterTecnicoPorId(Long id) {
-        Optional<Tecnico> tecnicoOptional = tecnicoRepository.findById(id);
-        return tecnicoOptional.orElse(null);
+        return tecnicoRepository.findById(id).orElse(null);
     }
 
     public Tecnico findByNome(String nome) {
         return tecnicoRepository.findByNomeTecnico(nome);
+    }
+
+    public Tecnico updateTecnico
+            (Long tecnicoId, String nomeTecnico, String cargoTecnico, String email, String telefone, MultipartFile novaFotoPerfil) throws IOException {
+        return tecnicoValidation.validateAndUpdateTecnico(tecnicoId, nomeTecnico, cargoTecnico, email, telefone, novaFotoPerfil, tecnicoRepository, fileStorageService);
     }
 }

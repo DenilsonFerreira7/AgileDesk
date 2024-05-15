@@ -103,8 +103,4 @@ public class PDFLaudoTecnico {
         return outputStream.toByteArray();
     }
 
-    public String generatePDFBase64(LaudoTecnico laudoTecnico) throws IOException {
-        // Retorna diretamente o array de bytes
-        return new String(generatePDF(laudoTecnico));
-    }
 }

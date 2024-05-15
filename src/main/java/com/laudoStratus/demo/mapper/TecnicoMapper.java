@@ -10,6 +10,8 @@ public class TecnicoMapper {
                 tecnico.getTecnicoId(),
                 tecnico.getNomeTecnico(),
                 tecnico.getCargoTecnico(),
+                tecnico.getEmail(),
+                tecnico.getTelefone(),
                 tecnico.getFotoPerfil()
         );
     }
