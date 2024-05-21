@@ -1,5 +1,6 @@
 package com.laudoStratus.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Usuario {
 
     private String Senha;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Chamado> chamados = new ArrayList<>();
 }

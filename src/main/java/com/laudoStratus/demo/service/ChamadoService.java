@@ -2,8 +2,7 @@ package com.laudoStratus.demo.service;
 
 import com.laudoStratus.demo.DTO.ChamadoDTO;
 import com.laudoStratus.demo.models.*;
-import com.laudoStratus.demo.repository.ChamadoRepository;
-import com.laudoStratus.demo.repository.DescricaoAtualizacaoRepository;
+import com.laudoStratus.demo.repository.*;
 import com.laudoStratus.demo.validacao.chamadosVal.ChamadoCreationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,9 @@ public class ChamadoService {
     private final ChamadoCreationService chamadoCreationService;
     private final DescricaoAtualizacaoRepository descricaoAtualizacaoRepository;
     private final ChamadoRepository chamadoRepository;
+    private final EmpresaRepository empresaRepository;
+    private final TecnicoRepository tecnicoRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public Chamado criarChamado(ChamadoDTO chamadoDTO) {
         if (chamadoDTO.getTitulo() == null || chamadoDTO.getTitulo().isEmpty()) {
@@ -27,14 +29,22 @@ public class ChamadoService {
             throw new IllegalArgumentException("A descrição do chamado é obrigatória");
         }
 
+        // Buscar as entidades associadas pelo ID
+        Empresa empresa = empresaRepository.findById(chamadoDTO.getIdEmpresa())
+                .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada"));
+        Tecnico tecnico = tecnicoRepository.findById(chamadoDTO.getIdTecnico())
+                .orElseThrow(() -> new IllegalArgumentException("Técnico não encontrado"));
+        Usuario usuario = usuarioRepository.findById(chamadoDTO.getIdUsuario())
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+
         // Criar o chamado
         Chamado novoChamado = new Chamado();
         novoChamado.setTitulo(chamadoDTO.getTitulo());
         novoChamado.setStatus("Aberto");
         novoChamado.setOpeningDateTime(new Date());
-        novoChamado.setEmpresa(chamadoDTO.getEmpresa());
-        novoChamado.setTecnico(chamadoDTO.getTecnico());
-        novoChamado.setUsuario(chamadoDTO.getUsuario());
+        novoChamado.setEmpresa(empresa);
+        novoChamado.setTecnico(tecnico);
+        novoChamado.setUsuario(usuario);
 
         novoChamado = chamadoRepository.save(novoChamado);
 
@@ -49,6 +59,8 @@ public class ChamadoService {
 
         return novoChamado;
     }
+
+
 
     public Chamado encerrarChamado(Long id) {
         Chamado chamado = chamadoRepository.findById(id)

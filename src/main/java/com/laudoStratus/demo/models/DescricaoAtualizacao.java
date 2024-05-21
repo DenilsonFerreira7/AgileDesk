@@ -1,5 +1,6 @@
 package com.laudoStratus.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,5 +30,6 @@ public class DescricaoAtualizacao {
 
     @ManyToOne
     @JoinColumn(name = "chamado_id")
+    @JsonBackReference
     private Chamado chamado;
 }

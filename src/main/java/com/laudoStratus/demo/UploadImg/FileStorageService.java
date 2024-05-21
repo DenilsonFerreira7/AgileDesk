@@ -1,6 +1,5 @@
 package com.laudoStratus.demo.UploadImg;
 
-import com.laudoStratus.demo.UploadImg.FileStorageProperties;
 import com.laudoStratus.demo.validacao.FileStorageVal.FileStorageValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

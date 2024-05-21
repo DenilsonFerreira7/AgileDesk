@@ -16,8 +16,8 @@ public class ChamadoDTO {
 
     private String titulo;
     private String descricao;
-    private Empresa empresa;
-    private Tecnico tecnico;
-    private Usuario Usuario;
+    private Long idEmpresa;
+    private Long idTecnico;
+    private Long idUsuario;
 
 }

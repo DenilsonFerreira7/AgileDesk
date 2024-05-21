@@ -1,5 +1,7 @@
 package com.laudoStratus.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +35,6 @@ public class Tecnico implements Serializable {
     private String fotoPerfil;
 
     @OneToMany(mappedBy = "tecnico")
+    @JsonManagedReference
     private List<Chamado> chamados = new ArrayList<>();
-
 }
