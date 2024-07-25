@@ -1,10 +1,7 @@
 package com.laudoStratus.demo.service;
 import com.laudoStratus.demo.models.Empresa;
-
 import com.laudoStratus.demo.models.Equipamento;
-
 import com.laudoStratus.demo.repository.EmpresaRepository;
-
 import com.laudoStratus.demo.validacao.empresaVal.EmpresaValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

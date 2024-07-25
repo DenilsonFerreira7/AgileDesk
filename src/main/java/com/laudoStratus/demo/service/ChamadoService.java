@@ -3,7 +3,6 @@ package com.laudoStratus.demo.service;
 import com.laudoStratus.demo.DTO.ChamadoDTO;
 import com.laudoStratus.demo.models.*;
 import com.laudoStratus.demo.repository.*;
-import com.laudoStratus.demo.validacao.chamadosVal.ChamadoCreationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,6 @@ import java.util.Date;
 @Service
 public class ChamadoService {
 
-    private final ChamadoCreationService chamadoCreationService;
     private final DescricaoAtualizacaoRepository descricaoAtualizacaoRepository;
     private final ChamadoRepository chamadoRepository;
     private final EmpresaRepository empresaRepository;

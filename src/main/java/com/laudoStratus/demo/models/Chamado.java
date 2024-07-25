@@ -2,10 +2,7 @@ package com.laudoStratus.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.laudoStratus.demo.models.DescricaoAtualizacao;
-import com.laudoStratus.demo.models.Empresa;
-import com.laudoStratus.demo.models.Tecnico;
-import com.laudoStratus.demo.models.Usuario;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
