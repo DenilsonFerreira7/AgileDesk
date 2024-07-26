@@ -40,7 +40,7 @@ public class ChamadoController {
     }
 
     @PostMapping("/{id}/descricao")
-    public ResponseEntity<Chamado> adicionarDescricao(@PathVariable("id") Long idChamado,
+    public ResponseEntity<ResponseMessage> adicionarDescricao(@PathVariable("id") Long idChamado,
                                                       @Valid @RequestBody DescricaoAtualizacaoDTO descricaoAtualizacaoDTO) {
         // Converter DTO para entidade DescricaoAtualizacao
         DescricaoAtualizacao novaDescricao = new DescricaoAtualizacao();
@@ -50,7 +50,9 @@ public class ChamadoController {
         // Adicionar a nova descrição ao chamado
         Chamado chamadoAtualizado = chamadoService.adicionarDescricao(idChamado, novaDescricao);
 
-        return ResponseEntity.ok(chamadoAtualizado);
+        ResponseMessage responseMessage = new ResponseMessage
+                ("Descrição do chamado protocolo: "+chamadoAtualizado.getIdChamado()+ " atualizado");
+        return new ResponseEntity<>(responseMessage,HttpStatus.CREATED);
     }
 
 }
