@@ -38,7 +38,7 @@ public class PDFController {
 
         // Defina o nome do PDF com base nos dados do laudo técnico
         String nomeEmpresa = laudoTecnico.getEmpresa().getNomeEmpresa();
-        Long laudoId = laudoTecnico.getId();
+        Long laudoId = laudoTecnico.getIdLaudoTec();
         String timestamp = String.valueOf(System.currentTimeMillis());
         String nomePDF = nomeEmpresa + "_laudo" + laudoId + "_" + timestamp + ".pdf";
 
@@ -59,7 +59,7 @@ public class PDFController {
         byte[] pdfBytes = pdfPreventiva.generatePDF(laudoPreventiva);
 
         String nomeEmpresa = laudoPreventiva.getEmpresa().getNomeEmpresa();
-        Long laudoId = laudoPreventiva.getId();
+        Long laudoId = laudoPreventiva.getIdLaudoPrev();
         String timestamp = String.valueOf(System.currentTimeMillis());
         String nomePDF = nomeEmpresa + "_laudo_preventiva_" + laudoId + "_" + timestamp + ".pdf";
 

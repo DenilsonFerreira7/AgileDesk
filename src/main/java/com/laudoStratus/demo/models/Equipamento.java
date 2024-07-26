@@ -18,7 +18,7 @@ public class Equipamento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idEquipamento;
 
     private String nomeEquipamento;
 

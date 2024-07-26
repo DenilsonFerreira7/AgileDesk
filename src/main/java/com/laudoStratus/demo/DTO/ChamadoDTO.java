@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ChamadoDTO {
-
     private String titulo;
     private String descricao;
+    private Long idCategoria;
     private Long idEmpresa;
     private Long idTecnico;
     private Long idUsuario;
-
 }

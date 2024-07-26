@@ -5,60 +5,71 @@ import com.laudoStratus.demo.models.*;
 import com.laudoStratus.demo.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 
-@RequiredArgsConstructor
-@Service
-public class ChamadoService {
 
-    private final DescricaoAtualizacaoRepository descricaoAtualizacaoRepository;
-    private final ChamadoRepository chamadoRepository;
-    private final EmpresaRepository empresaRepository;
-    private final TecnicoRepository tecnicoRepository;
-    private final UsuarioRepository usuarioRepository;
+    @Service
+    @RequiredArgsConstructor
+    public class ChamadoService {
 
-    public Chamado criarChamado(ChamadoDTO chamadoDTO) {
-        if (chamadoDTO.getTitulo() == null || chamadoDTO.getTitulo().isEmpty()) {
-            throw new IllegalArgumentException("O título do chamado é obrigatório");
+        private final DescricaoAtualizacaoRepository descricaoAtualizacaoRepository;
+        private final ChamadoRepository chamadoRepository;
+        private final EmpresaRepository empresaRepository;
+        private final TecnicoRepository tecnicoRepository;
+        private final UsuarioRepository usuarioRepository;
+        private final CategoriaRepository categoriasRepository;
+
+        public Chamado criarChamado(ChamadoDTO chamadoDTO) {
+            if (chamadoDTO.getTitulo() == null || chamadoDTO.getTitulo().isEmpty()) {
+                throw new IllegalArgumentException("O título do chamado é obrigatório");
+            }
+
+            if (chamadoDTO.getDescricao() == null || chamadoDTO.getDescricao().isEmpty()) {
+                throw new IllegalArgumentException("A descrição do chamado é obrigatória");
+            }
+
+            // Buscar as entidades associadas pelo ID
+            Empresa empresa = empresaRepository.findById(chamadoDTO.getIdEmpresa())
+                    .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada"));
+
+            Categorias categoria = categoriasRepository.findById(chamadoDTO.getIdCategoria())
+                    .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
+
+            // Criar o chamado
+            Chamado novoChamado = new Chamado();
+            novoChamado.setTitulo(chamadoDTO.getTitulo());
+            novoChamado.setStatus("Aberto");
+            novoChamado.setOpeningDateTime(new Date());
+            novoChamado.setEmpresa(empresa);
+            novoChamado.setCategorias(categoria);
+
+            // Associar técnico se idTecnico não for nulo
+            if (chamadoDTO.getIdTecnico() != null) {
+                Tecnico tecnico = tecnicoRepository.findById(chamadoDTO.getIdTecnico())
+                        .orElseThrow(() -> new IllegalArgumentException("Técnico não encontrado"));
+                novoChamado.setTecnico(tecnico);
+            }
+
+            // Associar usuário se idUsuario não for nulo
+            if (chamadoDTO.getIdUsuario() != null) {
+                Usuario usuario = usuarioRepository.findById(chamadoDTO.getIdUsuario())
+                        .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+                novoChamado.setUsuario(usuario);
+            }
+
+            novoChamado = chamadoRepository.save(novoChamado);
+
+            // Criar a descrição
+            DescricaoAtualizacao primeiraDescricao = new DescricaoAtualizacao();
+            primeiraDescricao.setDescricao(chamadoDTO.getDescricao());
+            primeiraDescricao.setAtualizadoPor("Sistema");
+            primeiraDescricao.setUpdateDateTime(new Date());
+            primeiraDescricao.setChamado(novoChamado);
+
+            descricaoAtualizacaoRepository.save(primeiraDescricao);
+
+            return novoChamado;
         }
-
-        if (chamadoDTO.getDescricao() == null || chamadoDTO.getDescricao().isEmpty()) {
-            throw new IllegalArgumentException("A descrição do chamado é obrigatória");
-        }
-
-        // Buscar as entidades associadas pelo ID
-        Empresa empresa = empresaRepository.findById(chamadoDTO.getIdEmpresa())
-                .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada"));
-        Tecnico tecnico = tecnicoRepository.findById(chamadoDTO.getIdTecnico())
-                .orElseThrow(() -> new IllegalArgumentException("Técnico não encontrado"));
-        Usuario usuario = usuarioRepository.findById(chamadoDTO.getIdUsuario())
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
-
-        // Criar o chamado
-        Chamado novoChamado = new Chamado();
-        novoChamado.setTitulo(chamadoDTO.getTitulo());
-        novoChamado.setStatus("Aberto");
-        novoChamado.setOpeningDateTime(new Date());
-        novoChamado.setEmpresa(empresa);
-        novoChamado.setTecnico(tecnico);
-        novoChamado.setUsuario(usuario);
-
-        novoChamado = chamadoRepository.save(novoChamado);
-
-        // Criar a descrição
-        DescricaoAtualizacao primeiraDescricao = new DescricaoAtualizacao();
-        primeiraDescricao.setDescricao(chamadoDTO.getDescricao());
-        primeiraDescricao.setAtualizadoPor("Sistema");
-        primeiraDescricao.setUpdateDateTime(new Date());
-        primeiraDescricao.setChamado(novoChamado);
-
-        descricaoAtualizacaoRepository.save(primeiraDescricao);
-
-        return novoChamado;
-    }
-
-
 
     public Chamado encerrarChamado(Long id) {
         Chamado chamado = chamadoRepository.findById(id)

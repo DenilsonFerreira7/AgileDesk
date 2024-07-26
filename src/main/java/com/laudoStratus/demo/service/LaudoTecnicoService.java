@@ -74,7 +74,7 @@ public class LaudoTecnicoService {
         TecnicoResponse tecnicoResponse = TecnicoMapper.mapTecnicoToTecnicoResponse(laudoTecnico.getTecnico());
 
         return new LaudoTecnicoResponse(
-                laudoTecnico.getId(),
+                laudoTecnico.getIdLaudoTec(),
                 empresaResponse,
                 equipamentosResponse,
                 tecnicoResponse,

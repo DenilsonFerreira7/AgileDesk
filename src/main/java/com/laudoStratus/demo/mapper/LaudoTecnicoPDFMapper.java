@@ -6,7 +6,7 @@ import com.laudoStratus.demo.models.LaudoTecnico;
 public class LaudoTecnicoPDFMapper {
     public static LaudoTecnicoPDFDTO mapLaudoTecnicoToLaudoTecnicoPDFDTO(LaudoTecnico laudoTecnico) {
         return new LaudoTecnicoPDFDTO(
-                laudoTecnico.getId(), // Adiciona o ID do laudo
+                laudoTecnico.getIdLaudoTec(), // Adiciona o ID do laudo
                 laudoTecnico.getEmpresa().getNomeEmpresa(),
                 laudoTecnico.getTecnico().getNomeTecnico(),
                 laudoTecnico.getDescricao(),

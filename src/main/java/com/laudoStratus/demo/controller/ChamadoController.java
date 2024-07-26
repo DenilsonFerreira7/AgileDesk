@@ -5,6 +5,7 @@ import com.laudoStratus.demo.DTO.DescricaoAtualizacaoDTO;
 import com.laudoStratus.demo.models.Chamado;
 import com.laudoStratus.demo.models.DescricaoAtualizacao;
 import com.laudoStratus.demo.service.ChamadoService;
+import com.laudoStratus.demo.util.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,11 @@ public class ChamadoController {
 
 
     @PostMapping("/criar")
-    public ResponseEntity<String> criarChamado(@RequestBody ChamadoDTO chamadoDTO) {
+    public ResponseEntity<ResponseMessage> criarChamado(@RequestBody ChamadoDTO chamadoDTO) {
         Chamado novoChamado = chamadoService.criarChamado(chamadoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("CHAMADO CRIADO COM SUCESSO, PROTOCOLO: " +novoChamado.getIdChamado());
+        ResponseMessage responseMessage = new ResponseMessage("Chamado Criado com sucesso protocolo: "+novoChamado.getIdChamado());
+        return new ResponseEntity<>(responseMessage,HttpStatus.CREATED);
     }
-
     @PutMapping("/encerrar/{id}")
     public ResponseEntity<Chamado> encerrarChamado(@PathVariable Long id) {
         Chamado chamado = chamadoService.encerrarChamado(id);

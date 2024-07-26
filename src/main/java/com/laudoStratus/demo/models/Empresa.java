@@ -23,7 +23,7 @@ public class Empresa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long empresaId;
+    private Long idEmpresa;
 
 
     private String nomeEmpresa;

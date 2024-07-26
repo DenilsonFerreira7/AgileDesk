@@ -62,7 +62,7 @@ public class PDFPreventiva {
                 document.add(createHeader("Laudo de Preventiva"));
 
                 // Informações da empresa e técnico
-                Long empresaId = laudoPreventiva.getEmpresa().getEmpresaId();
+                Long empresaId = laudoPreventiva.getEmpresa().getIdEmpresa();
                 Empresa empresa = empresaRepository.findById(empresaId).orElse(null);
 
                 if (empresa != null) {
@@ -82,7 +82,7 @@ public class PDFPreventiva {
                 equipmentTable.addCell(new Cell().add(new Paragraph("Setor")).setFont(font).setBold());
                 equipmentTable.addCell(new Cell().add(new Paragraph("Quantidade")).setFont(font).setBold());
 
-                List<Object[]> countEquipamentosETipos = laudoPreventivaRepository.countEquipamentosByTipoAndSetor(laudoPreventiva.getId());
+                List<Object[]> countEquipamentosETipos = laudoPreventivaRepository.countEquipamentosByTipoAndSetor(laudoPreventiva.getIdLaudoPrev());
                 for (Object[] row : countEquipamentosETipos) {
                     String tipoEquipamento = (String) row[1];
                     String setor = (String) row[2];

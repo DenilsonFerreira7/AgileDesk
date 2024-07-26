@@ -21,11 +21,11 @@ public class LaudoPreventivaPDFMapper {
                 .collect(Collectors.toList());
 
         return new LaudoPreventivaPDFDTO(
-                laudoPreventiva.getId(),
-                laudoPreventiva.getEmpresa().getEmpresaId(), // Alterado para obter o ID da empresa
+                laudoPreventiva.getIdLaudoPrev(),
+                laudoPreventiva.getEmpresa().getIdEmpresa(), // Alterado para obter o ID da empresa
                 laudoPreventiva.getEmpresa().getNomeEmpresa(), // Obtendo o nome da empresa
-                laudoPreventiva.getEquipamentos().stream().map(Equipamento::getId).collect(Collectors.toList()),
-                laudoPreventiva.getTecnico().getTecnicoId(), // Alterado para obter o ID do técnico
+                laudoPreventiva.getEquipamentos().stream().map(Equipamento::getIdEquipamento).collect(Collectors.toList()),
+                laudoPreventiva.getTecnico().getIdTecnico(), // Alterado para obter o ID do técnico
                 laudoPreventiva.getTecnico().getNomeTecnico(), // Obtendo o nome do técnico
                 laudoPreventiva.getDescricao(),
                 equipamentosPorSetor,

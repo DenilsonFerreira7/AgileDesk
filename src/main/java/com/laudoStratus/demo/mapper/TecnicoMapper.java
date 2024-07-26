@@ -7,7 +7,7 @@ public class TecnicoMapper {
 
     public static TecnicoResponse mapTecnicoToTecnicoResponse(Tecnico tecnico) {
         return new TecnicoResponse(
-                tecnico.getTecnicoId(),
+                tecnico.getIdTecnico(),
                 tecnico.getNomeTecnico(),
                 tecnico.getCargoTecnico(),
                 tecnico.getEmail(),

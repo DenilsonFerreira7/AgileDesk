@@ -20,7 +20,7 @@ public class LaudoPreventiva implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idLaudoPrev;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")

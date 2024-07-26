@@ -1,9 +1,6 @@
 package com.laudoStratus.demo.controller;
 
-import com.laudoStratus.demo.DTO.ChamadoDTO;
 import com.laudoStratus.demo.models.Categorias;
-import com.laudoStratus.demo.models.Chamado;
-import com.laudoStratus.demo.models.Empresa;
 import com.laudoStratus.demo.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

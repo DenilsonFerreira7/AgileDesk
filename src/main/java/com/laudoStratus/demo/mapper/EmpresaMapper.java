@@ -7,7 +7,7 @@ public class EmpresaMapper {
 
     public static EmpresaResponse mapEmpresaToEmpresaResponse(Empresa empresa) {
         return new EmpresaResponse(
-                empresa.getEmpresaId(),
+                empresa.getIdEmpresa(),
                 empresa.getNomeEmpresa(),
                 empresa.getEndereco(),
                 empresa.getTelefone()

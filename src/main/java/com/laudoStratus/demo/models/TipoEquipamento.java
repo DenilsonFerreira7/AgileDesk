@@ -17,7 +17,7 @@ public class TipoEquipamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tipoEquipamentoId;
+    private Long idTipoEquipamento;
 
     @Column(name = "nome")
     private String nomeEquipamento;

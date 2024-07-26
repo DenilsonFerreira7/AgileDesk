@@ -37,16 +37,20 @@ public class Chamado {
     private Date closingDateTime;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
+    @JoinColumn(name = "id_Categoria")
+    private Categorias categorias;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
     @ManyToOne
-    @JoinColumn(name = "tecnico_id")
+    @JoinColumn(name = "id_tecnico")
     @JsonBackReference
     private Tecnico tecnico;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "chamado")
